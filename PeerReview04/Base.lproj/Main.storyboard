@@ -77,7 +77,7 @@
                                     <segment title="Miles"/>
                                 </segments>
                             </segmentedControl>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Third destination" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E9x-sa-yWj">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fourth destination" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E9x-sa-yWj">
                                 <rect key="frame" x="20" y="583" width="181" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -99,9 +99,11 @@
                         <outlet property="distanceA" destination="B8G-kS-QGG" id="Plz-qA-Cp8"/>
                         <outlet property="distanceB" destination="lLm-LF-QPf" id="PNV-Jh-zX9"/>
                         <outlet property="distanceC" destination="fvZ-jI-8mB" id="n2u-7m-OR3"/>
+                        <outlet property="distanceD" destination="lrm-xf-8Vz" id="QdH-wF-RmX"/>
                         <outlet property="endLocationA" destination="r57-mf-9RJ" id="FWr-z8-0uX"/>
                         <outlet property="endLocationB" destination="ijf-4U-1vo" id="m7D-nK-OoW"/>
                         <outlet property="endLocationC" destination="zbh-B6-Qy2" id="WGs-eZ-Vs3"/>
+                        <outlet property="endLocationD" destination="E9x-sa-yWj" id="mDZ-8X-BNY"/>
                         <outlet property="startLocation" destination="LNH-BX-ta2" id="Bg4-6w-DkU"/>
                         <outlet property="unitController" destination="puq-QG-FLo" id="OGA-hD-LRs"/>
                     </connections>

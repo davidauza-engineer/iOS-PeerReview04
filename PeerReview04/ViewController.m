@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *endLocationC;
 @property (weak, nonatomic) IBOutlet UILabel *distanceC;
 
+@property (weak, nonatomic) IBOutlet UITextField *endLocationD;
+@property (weak, nonatomic) IBOutlet UILabel *distanceD;
+
 @property (weak, nonatomic) IBOutlet UIButton *calculateButton;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *unitController;
@@ -41,7 +44,8 @@
     NSString *destA = self.endLocationA.text;
     NSString *destB = self.endLocationB.text;
     NSString *destC = self.endLocationC.text;
-    NSArray *dests = @[destA, destB, destC];
+    NSString *destD = self.endLocationD.text;
+    NSArray *dests = @[destA, destB, destC, destD];
     
     self.req = [self.req initWithLocationDescriptions: dests sourceDescription: start];
     
@@ -54,25 +58,32 @@
         }
         
         NSNull *badResult = [NSNull null];
+        NSArray *distanceLabels = @[strongSelf.distanceA, strongSelf.distanceB, strongSelf.distanceC, strongSelf.distanceD];
         
-        if (responses[0] != badResult) {
-            double num;
-            
-            if (strongSelf.unitController.selectedSegmentIndex == 0) {
-                num = [responses[0] floatValue];
-                NSString *x = [NSString stringWithFormat: @"%.2f m", num];
-                strongSelf.distanceA.text = x;
-            } else if (strongSelf.unitController.selectedSegmentIndex == 1) {
-                num = [responses[0] floatValue] / 1000.0;
-                NSString *x = [NSString stringWithFormat: @"%.2f km", num];
-                strongSelf.distanceA.text = x;
+        for (int i = 0; i < [responses count]; i++) {
+            UILabel *currentLabel = distanceLabels[i];
+            if (responses[i] != badResult) {
+                double distance = [responses[i] floatValue];
+                NSString *distanceString;
+                switch (strongSelf.unitController.selectedSegmentIndex) {
+                    case 0:
+                        distanceString = [NSString stringWithFormat: @"%.2f m", distance];
+                        break;
+                    
+                    case 1:
+                        distance /= 1000.0;
+                        distanceString = [NSString stringWithFormat: @"%.2f km", distance];
+                        break;
+                        
+                    case 2:
+                        distance /= 1609.0;
+                        distanceString = [NSString stringWithFormat: @"%.2f miles", distance];
+                        break;
+                }
+                currentLabel.text = distanceString;
             } else {
-                num = [responses[0] floatValue] / 1609;
-                NSString *x = [NSString stringWithFormat: @"%.2f miles", num];
-                strongSelf.distanceA.text = x;
+                currentLabel.text = @"Error";
             }
-        } else {
-            strongSelf.distanceA.text = @"Error";
         }
         
         strongSelf.req = nil;
